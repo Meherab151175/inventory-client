@@ -60,7 +60,7 @@ const AuthProvider = ({ children }) => {
             setUser(user);
             if (user) {
 
-                axios.post('http://localhost:5000/jwt', { email: user?.email })
+                axios.post('https://inventory-server-seven.vercel.app/jwt', { email: user?.email })
                     .then(data => {
                         
                         if (data.data?.token) {

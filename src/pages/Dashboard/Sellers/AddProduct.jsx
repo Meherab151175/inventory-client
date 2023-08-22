@@ -33,7 +33,7 @@ const AddProduct = () => {
                         newData.submitted = new Date(); 
                         newData.totalSell = 0;
                         // console.log(newData);
-                        axiosSecure.post('/new-class' , newData)
+                        axiosSecure.post('/new-product' , newData)
                         .then(res => {
                             console.log(res.data);
                         })

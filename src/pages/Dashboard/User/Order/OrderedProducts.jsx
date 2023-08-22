@@ -28,7 +28,7 @@ const OrderedProducts = () => {
 
 
     useEffect(() => {
-        axiosSecure.get(`/ordered-products/${currentUser.email}`)
+        axiosSecure.get(`/ordered-products/${currentUser?.email}`)
             .then(res => {
                 setData(res.data)
                 setLoading(false)

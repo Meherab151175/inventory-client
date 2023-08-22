@@ -137,7 +137,7 @@ const NavBar = () => {
           >
             <div className={``}>
               <h1 className="text-2xl font-Cinzel  inline-flex gap-3  items-center font-bold">
-                emajhon inventory <FcElectricalSensor className="text-4xl" />
+                emajhon inventory
               </h1>
               {/* tracking-[8px] */}
               <p className="font-bold text-[13px]  ">

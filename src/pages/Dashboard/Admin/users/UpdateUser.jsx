@@ -1,21 +1,19 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../../../hooks/useAuth';
 import { useLoaderData } from 'react-router-dom';
-import useAxiosFetch from '../../../../hooks/useAxiosFetch';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { toast } from 'react-toastify';
+import { useAuth } from '../../../../hooks/useAuth';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 const UpdateUser = () => {
     const { user } = useAuth();
     const userCredentials = useLoaderData();
     const [loading, setLoading] = useState(false);
-    const axiosFetch = useAxiosFetch();
     const axiosSecure = useAxiosSecure();
     const handleFormSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData(e.target);
         const updatedData = Object.fromEntries(formData);
 
-        toast.promise(
+
             axiosSecure.put(`/update-user/${userCredentials?._id}`, updatedData)
                 .then((res) => {
                     console.log(res.data);
@@ -24,13 +22,7 @@ const UpdateUser = () => {
                 .catch((err) => {
                     console.log(err);
                     throw new Error('Registration failed!');
-                }),
-            {
-                pending: 'Please wait...',
-                success: 'Updated successful!',
-                error: 'Update failed...!',
-            }
-        );
+                })
     };
 
 
@@ -84,17 +76,6 @@ const UpdateUser = () => {
                                         id="email"
                                     />
                                 </div>
-                                {/* <div>
-                                    <label className="ml-2" htmlFor="phone">Skills</label>
-                                    <p className='text-[12px] ml-2 text-red-400'>If the user is an instructor, then set skills; otherwise, leave it empty</p>
-                                    <input
-                                        className="w-full mt-2 rounded-lg border outline-none border-secondary p-3 text-sm"
-                                        placeholder="Skills"
-                                        defaultValue={userCredentials?.skills ? userCredentials?.skills : ''}
-                                        type="text"
-                                        name="skills"
-                                    />
-                                </div> */}
                             </div>
                             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                                 <div>

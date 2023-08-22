@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import useAxiosFetch from '../../hooks/useAxiosFetch';
 
 const ShowSellers = () => {
-    const axiosInstance = useAxiosFetch();
+    const axiosFetch = useAxiosFetch();
     const [sellers, setSellers] = useState([]);
     useEffect(() => {
-        axiosInstance.get('/sellers')
+        axiosFetch.get('/sellers')
             .then(res => setSellers(res.data))
     }, [])
     return (
@@ -29,11 +29,11 @@ const ShowSellers = () => {
                                         </tr>
                                             <tr>
                                                 <td className="px-2 py-2 text-gray-500 font-semibold">Phone</td>
-                                                <td className={`px-2 py-2 ${seller.phone || 'text-red-400'}`}>{seller.phone ? seller.phone : 'Not Provided'}</td>
+                                                <td className={`px-2 py-2 ${seller?.phone || 'text-red-400'}`}>{seller.phone ? seller?.phone : 'Not Provided'}</td>
                                             </tr>
                                             <tr>
                                                 <td className="px-2 py-2 text-gray-500 font-semibold">Email</td>
-                                                <td className="px-2 py-2">{seller.email}</td>
+                                                <td className="px-2 py-2">{seller?.email}</td>
                                             </tr>
                                         </tbody></table>
 

@@ -23,7 +23,7 @@ const GoogleLogin = () => {
                     };
 
                     if (user.email && user.displayName) {
-                        return axios.post('http://localhost:5000/new-user', userImp)
+                        return axios.post('https://inventory-server-seven.vercel.app/new-user', userImp)
                             .then(() => {
                                 navigate('/dashboard');
                                 return 'Registration successful!';

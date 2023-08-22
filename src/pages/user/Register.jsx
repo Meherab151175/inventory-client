@@ -11,8 +11,8 @@ import GoogleLogin from '../../components/Social/GoogleLogin';
 
 const Register = () => {
     useTitle('Register | emajhon inventory');
-    const { signUp, error, setError, updateUser } = useContext(AuthContext);
     const navigate = useNavigate();
+    const { signUp, error, setError, updateUser } = useContext(AuthContext);
     const {
         register,
         handleSubmit,
@@ -41,7 +41,7 @@ const Register = () => {
 
                             if (user?.email) {
                                 return axios
-                                    .post('http://localhost:5000/new-user', userImp)
+                                    .post('https://inventory-server-seven.vercel.app/new-user', userImp)
                                     .then(() => {
                                         navigate('/');
                                         return 'Registration successful!';

@@ -9,7 +9,7 @@ export const useUser = () => {
         queryKey: ['user', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/user/${user?.email}`);
-            return res.data;
+            return res?.data;
         },
         enabled: !!user?.email && !!localStorage.getItem('access-token'),
     })

@@ -39,12 +39,6 @@ const {setControl,control} = useContext(AuthContext)
     axiosSecure
       .get(`/cart-item/${id}?email=${currentUser.email}`)
       .then((res) => {
-        // if (res.data.productId === id) {
-        //   return toast.error("Already Selected");
-        // } else if (orderedProducts.find((item) => item.products._id === id)) {
-        //   return toast.error("Already Selected");
-        // } 
-        // else {
           const data = {
             productId: id,
             userMail: currentUser.email,
@@ -70,7 +64,6 @@ const {setControl,control} = useContext(AuthContext)
               },
             }
           );
-        // }
       });
   };
 
@@ -86,7 +79,7 @@ const {setControl,control} = useContext(AuthContext)
         {products.map((cls, index) => (
           <div
             key={index}
-            className={`relative hover:-translate-y-2  duration-150 hover:ring-[2px] hover:ring-secondary w-64 h-80 mx-auto ${
+            className={`relative  hover:ring-[2px] hover:ring-secondary w-64 max-h-96 mx-auto ${
               cls.availableQuantity < 1 ? "bg-red-300" : "bg-white"
             } dark:bg-slate-600 rounded-lg shadow-lg overflow-hidden cursor-pointer`}
             onMouseEnter={() => handleHover(index)}
@@ -103,36 +96,7 @@ const {setControl,control} = useContext(AuthContext)
                 alt="Course Image"
                 className="object-cover w-full h-full"
               />
-              <Transition
-                show={hoveredCard === index}
-                enter="transition-opacity duration-300"
-                enterFrom="opacity-0"
-                enterTo="opacity-100"
-                leave="transition-opacity duration-300"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-              >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <button
-                    onClick={() => handelSelect(cls._id)}
-                    title={
-                      role === "admin" || role === "seller"
-                        ? "Seller/Admin Can not be able to select "
-                          ? cls.availableQuantity < 1
-                          : "No seat avalible"
-                        : "You can select this classes"
-                    }
-                    disabled={
-                      role === "admin" ||
-                      role === "seller" ||
-                      cls.availableQuantity < 1
-                    }
-                    className="px-4 py-2 text-white disabled:bg-red-300 bg-secondary duration-300 rounded hover:bg-red-700"
-                  >
-                    Select
-                  </button>
-                </div>
-              </Transition>
+                
             </div>
             <div className="px-6 py-2">
               <h3
@@ -155,6 +119,26 @@ const {setControl,control} = useContext(AuthContext)
                 </span>
               </div>
             </div>
+            <div className="py-4 inset-0 flex items-center justify-center">
+                  <button
+                    onClick={() => handelSelect(cls._id)}
+                    title={
+                      role === "admin" || role === "seller"
+                        ? "Seller/Admin Can not be able to select "
+                          ? cls.availableQuantity < 1
+                          : "No product avalible"
+                        : "You can select this products"
+                    }
+                    disabled={
+                      role === "admin" ||
+                      role === "seller" ||
+                      cls.availableQuantity < 1
+                    }
+                    className="px-4 py-2 text-white disabled:bg-red-300 bg-secondary duration-300 rounded hover:bg-red-700"
+                  >
+                    Add to Cart
+                  </button>
+                </div>
           </div>
         ))}
       </div>

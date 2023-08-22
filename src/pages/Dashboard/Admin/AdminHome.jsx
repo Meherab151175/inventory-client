@@ -9,7 +9,7 @@ const AdminHome = () => {
     const [users, setUsers] = useState([]);
     useEffect(() => {
         axiosFetch('/users')
-            .then(res => setUsers(res.data))
+            .then(res => setUsers(res?.data))
             .catch(err => console.log(err));
     }, []);
     return (

@@ -3,7 +3,7 @@ import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useUser } from '../../../../hooks/useUser';
 const CheckoutPayment = ({ price , cartItm }) => {
-    const URL =`http://localhost:5000/payment-info?${cartItm&&`productId=${cartItm}`}`
+    const URL =`https://inventory-server-seven.vercel.app/payment-info?${cartItm&&`productId=${cartItm}`}`
     console.log(URL)
     const stripe = useStripe();
     const elements = useElements();

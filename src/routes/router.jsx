@@ -74,7 +74,7 @@ export const router = createBrowserRouter([
             {
                 path: 'update-user/:id',
                 element: <UpdateUser />,
-                loader: ({ params }) => fetch(`http://localhost:5000/users/${params.id}`),
+                loader: ({ params }) => fetch(`https://inventory-server-seven.vercel.app/users/${params.id}`),
             },
             {
                 path: 'admin-home',
@@ -100,7 +100,7 @@ export const router = createBrowserRouter([
             {
                 path: 'update/:id',
                 element: <UpdateProduct />,
-                loader: ({ params }) => fetch(`http://localhost:5000/product/${params.id}`),
+                loader: ({ params }) => fetch(`https://inventory-server-seven.vercel.app/product/${params.id}`),
             },
             // * USER ROUTES
             {

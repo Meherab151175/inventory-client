@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import useAxiosFetch from '../../../../hooks/useAxiosFetch';
 import { GrUpdate } from 'react-icons/gr'
 import { FcDeleteDatabase } from 'react-icons/fc';
 import Swal from 'sweetalert2';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../../utilities/providers/AuthProvider';
+import { toast } from 'react-toastify';
 const ManageUsers = () => {
     const navigate = useNavigate();
     const axiosFetch = useAxiosFetch();
     const axiosSecure  = useAxiosSecure();
     const [users, setUsers] = useState([]);
+    const {control,setControl} = useContext(AuthContext)
     useEffect(() => {
         axiosFetch.get('/users')
             .then(res => {
                 setUsers(res.data)
             })
             .catch(err => console.log(err))
-    }, [])
+    }, [control])
 
     const handleDelete = (id) => {
         Swal.fire({
@@ -29,12 +32,21 @@ const ManageUsers = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/delete-user/${id}`)
+                toast.promise(
+                    axiosSecure.delete(`/delete-user/${id}`)
                 .then(res => { 
                     console.log(res.data)
+                    if(res?.data?.deletedCount>0){
+                        setControl(!control)
+                    }
                     
                 })
                 .catch(err => console.log(err))
+                ),
+                {
+                    success: 'Delete successful!',
+                    error: 'Delete failed...!',
+                }
 
 
             }
